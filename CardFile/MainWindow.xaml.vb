@@ -79,13 +79,8 @@ Class MainWindow
     Private Sub FileInDB()
         ActiveDB.CardFiles.InsertOnSubmit(loadedCardFile)
         ActiveDB.SubmitChanges()
-        ' Get ID of inserted CardFile
-        Dim cardFileIDs = From cardFile In ActiveDB.CardFiles
-                          Where cardFile.CardFile_Name Is loadedCardFile.CardFile_Name
-                          Select cardFile.CardFile_ID
-                          Order By CardFile_ID Descending
 
-        Dim cardFileID As Integer = cardFileIDs.First()
+        Dim cardFileID As Integer = loadedCardFile.CardFile_ID
 
         For Each _card In loadedCardFile.Cards
             _card.CardFile_ID = cardFileID
